@@ -83,54 +83,7 @@ const titles = [
   "Great Expectations",
   "Little Women",
 ];
-function authorsAndBooks () {
-  books.forEach((books) => console.log(books.authorFirst, books.authorLast + " wrote", books.name + " in", books.publishDate));
-};
-authorsAndBooks();
 
- function oldestRecent () {
-  const orderedDates = books.sort(function (book1, book2) {
-    return book1.publishDate - book2.publishDate;
-  });
-  orderedDates.forEach(el => {
-    console.log(el);
-  })
-}
-oldestRecent();
-
- function alphabetical () {
-  const alphabetically = books.sort(function (book1, book2) {
-    const nameBook1 = book1.name.toUpperCase(); // ignore upper / lower case
-    const nameBook2 = book2.name.toUpperCase();
-    if (nameBook1 < nameBook2) {
-      return -1;
-    }
-    if (nameBook1 > nameBook2) {
-      return 1;
-    }
-    return 0;
-  })
-  alphabetically.forEach(el => {
-    console.log(el);
-  });
-}
-alphabetical(); 
-
-function warAndPeace () {
-  const warPeace = books.filter(
-    (books) => books.name === "War and Peace"
-  );
-  warPeace.forEach((warPeace) => console.log(warPeace.authorFirst, warPeace.authorLast));
-}
-warAndPeace();
-
-function historicalBooks () {
-  const historical = books.filter(
-    (books) => books.genre = "historical" // put one equal sign if there are multiple values in genre and u want to print books that include historical regardless whether they have other genres
-  );
-  historical.forEach((historical) => console.log(historical.name, historical.genre));
-}
-historicalBooks();
 
 //Array of authors and the book they wrote
 //"--- wrote --- in ---"
@@ -149,49 +102,70 @@ historicalBooks();
 
 //print a list of books that "includes" the genre historical
 
-function before1900 () {
-  const before = books.filter(
-    (books) => books.publishDate <= 1900,
-  );
-  function compare1() {
-    if (before.length >= 1) {
-      console.log(before.length + " books were written before 1900.");
+function authorsAndBooks () {
+  books.forEach((books) => console.log(books.authorFirst, books.authorLast +" wrote", books.name + " in", books.publishDate));
+};
+authorsAndBooks();
+
+function oldestToRecent () {
+  const oldestRecent = books.sort((book1, book2) => book1.publishDate - book2.publishDate);
+  oldestRecent.forEach((oldestRecent) => console.log(oldestRecent.name, oldestRecent.publishDate));
+};
+oldestToRecent();
+
+function alphabetically () {
+  const alphabetical = books.sort((book1, book2) => {
+    const nameBook1 = book1.name.toUpperCase(); 
+    const nameBook2 = book2.name.toUpperCase(); 
+    if (nameBook1 < nameBook2) {
+      return -1;
     }
-    else {
-      console.log("None");
+    if (nameBook1 > nameBook2) {
+      return 1;
     }
-  }
-  compare1();
-}
+  
+    return 0;
+  });
+  alphabetical.forEach((alphabetical) => console.log(alphabetical.name));
+};
+alphabetically();
+
+function warAndPeace() {
+  const warPeace =books.filter((books) => books.name === "War and Peace");
+  warPeace.forEach((warPeace) => console.log(warPeace.authorFirst, warPeace.authorLast));
+};
+warAndPeace();
+
+function before1900() {
+  const before = books.filter((books) => books.publishDate < 1900);
+  console.log(before.length + " books were written before 1900");
+};
+before1900();
 
 function last100 () {
-  const recent = books.filter(
-    (books) => books.publishDate >= 1923,
-  );
-  function compare2() {
-    if (recent.length >= 1) {
-      console.log("Yes there was at least one book published within the last 100 years.");
-    }
-    if (recent.length == 0) {
-      return("No books were published within the last 100 years.");
-    }
+  const recent = books.filter((books) => books.publishDate >= 1923);
+  if (recent.length >= 1) {
+    console.log("Yes there was at least one book.")
   }
-  compare2();
-}
-function everyLast100 () {
-  const everyRecent = books.filter(
-    (books) => books.publishDate <= 1923,
-  );
-  function compare3() {
-    if (everyRecent.length >= 1) {
-      console.log("No, every book was not published within the last 100 years.");
-    }
-    else {
-      console.log("Yes, every book was published within the last 100 years.");
-    }
+  else {
+    console.log("No there was not at least one book.")
   }
-  compare3();
 }
-before1900();
 last100();
+
+function everyLast100 () {
+  const everyRecent = books.filter((books) => books.publishDate <= 1923);
+  if (everyRecent.length >= 1) {
+    console.log("No every book is not.")
+  }
+  else {
+    console.log("Yes every book is.")
+  }
+}
 everyLast100();
+
+function booksHistorical() {
+  const historical =books.filter((books) => books.genre = "historical");
+  historical.forEach((historical) => console.log(historical.name, historical.genre));
+};
+booksHistorical();
